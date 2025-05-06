@@ -1,13 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+
 spec:
   sources:
   - repoURL: 'https://prometheus-community.github.io/helm-charts'
     chart: prometheus
-    targetRevision: 71.0.0
+    targetRevision: 15.7.1
     helm:
       valueFiles:
-      - $values/components/kube-prometheus-stack/values.yaml
-  - repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
-    targetRevision: HEAD
+      - $values/charts/prometheus/values.yaml
+  - repoURL: 'https://git.example.com/org/value-files.git'
+    targetRevision: dev
     ref: values
