@@ -1,4 +1,5 @@
 
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 spec:
@@ -9,6 +10,6 @@ spec:
     helm:
       valueFiles:
       - $values/components/kube-prometheus-stack/values.yaml
-  - repoURL: 'https://git.example.com/org/value-files.git'
-    targetRevision: dev
+  - repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+    targetRevision: main
     ref: values
