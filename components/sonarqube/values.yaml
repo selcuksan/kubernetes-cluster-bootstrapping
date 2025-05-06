@@ -1,3 +1,5 @@
 OpenShift:
   enabled: false
 monitoringPasscode: "define_it"
+community:
+  enabled: true
