@@ -1,35 +1,35 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: argocd
-  namespace: argocd
-spec:
-  generators:
-    - git:
-        repoURL: "https://github.com/your-org/argocd-config.git"  # Your config repo
-        revision: "main"
-        files:
-          - path: "clusters/**/values.yaml"  # Recursive glob pattern
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: argocd
+#   namespace: argocd
+# spec:
+#   generators:
+#     - git:
+#         repoURL: "https://github.com/your-org/argocd-config.git"  # Your config repo
+#         revision: "main"
+#         files:
+#           - path: "clusters/**/values.yaml"  # Recursive glob pattern
 
-  template:
-    metadata:
-      name: "argocd-{{path.basename}}"  # Uses directory name as suffix
-    spec:
-      project: "default"
-      source:
-        repoURL: "https://argoproj.github.io/argo-helm"
-        targetRevision: "5.46.8"  # Argo CD Helm chart version
-        chart: "argo-cd"
-        helm:
-          releaseName: "argocd-{{path.basename}}"
-          valueFiles:
-            - "{{path}}"  # Path to values file from generator
-      destination:
-        server: "{{values.clusterUrl}}"  # Expected in values.yaml
-        namespace: "argocd"
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
+#   template:
+#     metadata:
+#       name: "argocd-{{path.basename}}"  # Uses directory name as suffix
+#     spec:
+#       project: "default"
+#       source:
+#         repoURL: "https://argoproj.github.io/argo-helm"
+#         targetRevision: "5.46.8"  # Argo CD Helm chart version
+#         chart: "argo-cd"
+#         helm:
+#           releaseName: "argocd-{{path.basename}}"
+#           valueFiles:
+#             - "{{path}}"  # Path to values file from generator
+#       destination:
+#         server: "{{values.clusterUrl}}"  # Expected in values.yaml
+#         namespace: "argocd"
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#           - CreateNamespace=true
