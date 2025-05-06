@@ -13,7 +13,7 @@ spec:
         repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"  # Your config repo
         revision: "main"
         files:
-          - path: "components/argocd/values.yaml"  
+          - path: "components/argocd/values.yaml"
   template:
     metadata:
       name: 'kube-prometheus-stack-{{cluster}}'
@@ -26,7 +26,7 @@ spec:
         helm:
           releaseName: kube-prometheus-stack
           valueFiles:
-            - "{{path}}"
+            - components/argocd/values.yaml
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{namespace}}'
