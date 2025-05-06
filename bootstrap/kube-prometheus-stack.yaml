@@ -14,7 +14,7 @@ spec:
       - path: "components/kube-prometheus-stack/values.yaml"
   template:
     metadata:
-      name: "kube-prometheus-stack'{{.path.basename}}'"
+      name: "kube-prometheus-stack-'{{.path.basename}}'"
     spec:
       project: default
       source:
