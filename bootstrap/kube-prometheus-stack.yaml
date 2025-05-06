@@ -11,7 +11,7 @@ spec:
       repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
       revision: main
       files:
-      - path: "values.yaml"
+      - path: "components/kube-prometheus-stack/values.yaml"
   template:
     metadata:
       name: "kube-prometheus-stack"
