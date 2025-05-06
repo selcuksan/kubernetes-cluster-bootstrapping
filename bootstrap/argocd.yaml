@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://github.com/argoproj/argo-helm'
+      chart: argo-cd
+      targetRevision: 7.9.0
+      helm:
+        valueFiles:
+        - $values/components/argocd/values.yaml
+    - repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd-development
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
