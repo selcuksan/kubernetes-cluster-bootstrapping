@@ -1,2 +1,2 @@
-grafana:
-  adminPassword: "prod-secret"
+alertmanager:
+  enabled: true
