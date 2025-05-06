@@ -4,35 +4,33 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
-    - list:
-        elements:
-          - cluster: in-cluster
-            namespace: monitoring
-    - git:
-        repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"  # Your config repo
-        revision: "main"
-        files:
-          - path: "components/kube-prometheus-stack/values.yaml"
+  - git:
+      repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+      revision: main
+      files:
+      - path: "values.yaml"
   template:
     metadata:
-      name: 'kube-prometheus-stack-{{cluster}}'
+      name: "kube-prometheus-stack"
     spec:
       project: default
       source:
-        repoURL: 'https://prometheus-community.github.io/helm-charts'
-        targetRevision: 71.0.0
+        repoURL: https://prometheus-community.github.io/helm-charts
+        targetRevision: "71.0.0" # Specify the desired chart version
         chart: kube-prometheus-stack
         helm:
           releaseName: kube-prometheus-stack
           valueFiles:
-            - "{{path}}"
+          - "{{.path.path}}" # Reference the external values file
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: '{{namespace}}'
+        server: https://kubernetes.default.svc
+        namespace: monitoring
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-          - CreateNamespace=true
+        - CreateNamespace=true
