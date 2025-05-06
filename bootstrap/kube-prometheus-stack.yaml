@@ -1,36 +1,51 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: kube-prometheus-stack
+#   namespace: argocd
+# spec:
+#   goTemplate: true
+#   goTemplateOptions: ["missingkey=error"]
+#   generators:
+#   - git:
+#       repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+#       revision: main
+#       files:
+#       - path: "components/kube-prometheus-stack/values.yaml"
+#   template:
+#     metadata:
+#       name: kube-prometheus-stack-'{{.path.basename}}'
+#     spec:
+#       project: default
+#       source:
+#         repoURL: https://prometheus-community.github.io/helm-charts
+#         targetRevision: "71.0.0" 
+#         chart: kube-prometheus-stack
+#         helm:
+#           releaseName: kube-prometheus-stack
+#           valueFiles:
+#           - '{{.path.basename}}'
+#       destination:
+#         server: https://kubernetes.default.svc
+#         namespace: monitoring
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#         - CreateNamespace=true
+
+
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: kube-prometheus-stack
-  namespace: argocd
+kind: Application
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
-  generators:
-  - git:
-      repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
-      revision: main
-      files:
-      - path: "components/kube-prometheus-stack/values.yaml"
-  template:
-    metadata:
-      name: kube-prometheus-stack-'{{.path.basename}}'
-    spec:
-      project: default
-      source:
-        repoURL: https://prometheus-community.github.io/helm-charts
-        targetRevision: "71.0.0" 
-        chart: kube-prometheus-stack
-        helm:
-          releaseName: kube-prometheus-stack
-          valueFiles:
-          - '{{.path.basename}}'
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: monitoring
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-        - CreateNamespace=true
+  sources:
+  - repoURL: 'https://prometheus-community.github.io/helm-charts'
+    chart: prometheus
+    targetRevision: 71.0.0
+    helm:
+      valueFiles:
+      - $values/components/kube-prometheus-stack/values.yaml
+  - repoURL: 'https://git.example.com/org/value-files.git'
+    targetRevision: dev
+    ref: values
