@@ -11,5 +11,5 @@ spec:
       valueFiles:
       - $values/components/kube-prometheus-stack/values.yaml
   - repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
-    targetRevision: main
+    targetRevision: HEAD
     ref: values
