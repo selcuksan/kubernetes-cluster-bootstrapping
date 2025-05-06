@@ -26,7 +26,7 @@ spec:
         helm:
           releaseName: kube-prometheus-stack
           valueFiles:
-            - components/kube-prometheus-stack/values.yaml
+            - "{{path}}"
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{namespace}}'
