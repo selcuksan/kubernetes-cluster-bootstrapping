@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: 'https://SonarSource.github.io/helm-chart-sonarqube'
+    - repoURL: https://SonarSource.github.io/helm-chart-sonarqube
       chart: sonarqube
       targetRevision: 2025.2.0
       helm:

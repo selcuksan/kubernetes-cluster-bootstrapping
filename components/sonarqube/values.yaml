@@ -1,2 +1,3 @@
-replicaCount: 1
-
+OpenShift:
+  enabled: false
+monitoringPasscode: "define_it"
