@@ -8,5 +8,5 @@ spec:
     - group: "*"
       kind: "*"
   destinations:
-    - namespace: vault
+    - namespace: tracing
       server: https://kubernetes.default.svc
