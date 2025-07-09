@@ -14,7 +14,7 @@ spec:
         #   url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{ "{{" }}cluster{{ "}}" }}-loki'
+      name: '{{ "{{" }}cluster{{ "}}" }}-grafana-for-logging'
       namespace: argocd
     spec:
       project: logging
