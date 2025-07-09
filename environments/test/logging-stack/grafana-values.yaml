@@ -1,4 +1,4 @@
 global:
   imagePullSecrets:
-    - name: ""
-    - name: ""
+    - name: "asdasdasd"
+    - name: "asdasdasd"

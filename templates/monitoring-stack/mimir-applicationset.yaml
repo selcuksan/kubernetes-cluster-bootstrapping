@@ -18,7 +18,7 @@ spec:
       sources:
         - repoURL: https://grafana.github.io/helm-charts
           chart: mimir-distributed
-          targetRevision: 5.7.
+          targetRevision: 5.7.0
           helm:
             valueFiles:
               - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/mimir-values.yaml
