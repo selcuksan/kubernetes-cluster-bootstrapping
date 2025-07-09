@@ -9,8 +9,8 @@ spec:
         elements:
         - cluster: dev
           url: '{{ .Values.env.development.url }}'
-        - cluster: test
-          url: '{{ .Values.env.test.url }}'
+        # - cluster: test
+        #   url: '{{ .Values.env.test.url }}'
   template:
     metadata:
       name: '{{cluster}}-alloy'
