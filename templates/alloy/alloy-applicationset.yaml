@@ -11,7 +11,7 @@ spec:
         url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{ "{{" }}cluster{{ "}}" }}-alloy'
+      name: 'alloy-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
     spec:
       project: alloy

@@ -11,7 +11,7 @@ spec:
           url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{ "{{" }}cluster{{ "}}" }}-kube-prometheus-stack'
+      name: 'kube-prometheus-stack-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
     spec:
       project: monitoring

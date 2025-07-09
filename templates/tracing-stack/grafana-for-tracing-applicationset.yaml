@@ -12,7 +12,7 @@ spec:
           url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{ "{{" }}cluster{{ "}}" }}-grafana-for-tracing'
+      name: 'grafana-for-tracing-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
     spec:
       project: tracing

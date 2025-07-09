@@ -13,7 +13,7 @@ spec:
           #   url: "{{ .Values.env.test.url }}"
   template:
     metadata:
-      name: "{{ "{{" }}cluster{{ "}}" }}-tempo"
+      name: "tempo-{{ "{{" }}cluster{{ "}}" }}"
       namespace: argocd
     spec:
       project: tracing

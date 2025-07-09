@@ -11,7 +11,7 @@ spec:
           url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{ "{{" }}cluster{{ "}}" }}-mimir'
+      name: 'mimir-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
     spec:
       project: monitoring
