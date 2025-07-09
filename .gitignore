@@ -5,3 +5,5 @@ environments/test/*
 environments/dev/
 environments/dev/*
 
+root.yaml
+
