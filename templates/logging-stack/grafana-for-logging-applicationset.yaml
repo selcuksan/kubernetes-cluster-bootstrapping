@@ -9,7 +9,7 @@ spec:
   - list:
         elements:
         - cluster: dev
-          url: '{{ .Values.env.development.url }}'
+          url: '{{ .Values.env.test.url }}'
         # - cluster: test
         #   url: '{{ .Values.env.test.url }}'
   template:

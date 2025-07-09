@@ -12,4 +12,4 @@ spec:
     - https://grafana.github.io/helm-charts
   destinations:
     - namespace: monitoring
-      server: "{{ .Values.env.development.url }}"
+      server: "{{ .Values.env.test.url }}"
