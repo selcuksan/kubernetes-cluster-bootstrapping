@@ -7,10 +7,8 @@ spec:
   generators:
   - list:
         elements:
-        - cluster: dev
-          url: '{{ .Values.env.dev.url }}'
-        # - cluster: test
-        #   url: '{{ .Values.env.test.url }}'
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
   template:
     metadata:
       name: '{{ "{{" }}cluster{{ "}}" }}-alloy'
@@ -28,7 +26,7 @@ spec:
           targetRevision: HEAD
           ref: values
       destination:
-        server: '{{url}}'
+        server: '{{ "{{" }}url{{ "}}" }}'
         namespace: monitoring
       syncPolicy:
         automated:

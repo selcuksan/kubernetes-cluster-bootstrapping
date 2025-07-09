@@ -1,8 +1,6 @@
 env:
-  development:
+  test:
     url: https://kubernetes.default.svc
-  # test:
-  #   url: https://api.test.intra:6443
 
 argocd:
   namespace: "argocd"
