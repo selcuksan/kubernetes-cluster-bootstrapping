@@ -6,3 +6,4 @@
 # environments/dev/*
 
 root.yaml
+k8s-cluster.yaml

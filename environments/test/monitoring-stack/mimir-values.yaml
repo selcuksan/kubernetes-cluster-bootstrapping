@@ -1,5 +1,5 @@
 global:
-  dnsService: coredns
+  dnsService: kube-dns
   dnsNamespace: kube-system
   clusterDomain: cluster.local.
 
