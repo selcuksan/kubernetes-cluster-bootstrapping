@@ -1,5 +1,7 @@
 environments/
 environments/*
+environments/test/
 environments/test/*
-environments/tev/*
+environments/dev/
+environments/dev/*
 
