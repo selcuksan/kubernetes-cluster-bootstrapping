@@ -6,7 +6,7 @@ metadata:
 spec:
   storage:
     secret:
-      name: ""
+      name: "asdasdasd"
       type: s3
   storageSize: 1Gi
   resources:
