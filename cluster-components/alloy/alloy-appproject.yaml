@@ -11,4 +11,4 @@ spec:
     - https://grafana.github.io/helm-charts
   destinations:
     - namespace: alloy
-      server: "{{ .Values.env.test.url }}"
+      server: "{{ ../.Values.env.test.url }}"
