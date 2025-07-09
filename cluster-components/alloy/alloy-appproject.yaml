@@ -11,5 +11,4 @@ spec:
     - https://grafana.github.io/helm-charts
   destinations:
     - namespace: alloy
-      #server: https://kubernetes.default.svc
-      server: '{{ .Values.env.development.url }}'
+      server: "{{ .Values.env.development.url }}"

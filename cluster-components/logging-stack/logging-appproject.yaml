@@ -11,4 +11,4 @@ spec:
     - https://grafana.github.io/helm-charts
   destinations:
     - namespace: logging
-      server: https://kubernetes.default.svc
+      server: "{{ .Values.env.development.url }}"

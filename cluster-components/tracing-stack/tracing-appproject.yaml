@@ -7,6 +7,8 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+  sourceRepos:
+    - https://grafana.github.io/helm-charts
   destinations:
     - namespace: tracing
-      server: https://kubernetes.default.svc
+      server: "{{ .Values.env.development.url }}"
