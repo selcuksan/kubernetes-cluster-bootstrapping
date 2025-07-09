@@ -9,8 +9,6 @@ spec:
         elements:
         - cluster: test
           url: '{{ .Values.env.test.url }}'
-        - cluster: test
-          url: '{{ .Values.env.test.url }}'
   template:
     metadata:
       name: '{{ "{{" }}cluster{{ "}}" }}-kube-prometheus-stack'
