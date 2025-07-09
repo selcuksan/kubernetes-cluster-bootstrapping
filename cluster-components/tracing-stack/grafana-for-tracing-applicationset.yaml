@@ -25,7 +25,7 @@ spec:
           helm:
             valueFiles:
               - $values/environments/{{cluster}}/tracing-stack/grafana-values.yaml
-        - repoURL: '<>'
+        - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
       destination:

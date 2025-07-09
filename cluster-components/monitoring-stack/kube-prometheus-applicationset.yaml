@@ -24,7 +24,7 @@ spec:
           helm:
             valueFiles:
               - $values/environments/{{cluster}}/monitoring-stack/kube-prometheus-stack-values.yaml
-        - repoURL: <repository-url>
+        - repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
           targetRevision: HEAD
           ref: values
       destination:

@@ -16,7 +16,7 @@ spec:
       name: '{{cluster}}-alloy'
       namespace: argocd
     spec:
-      project: logging
+      project: alloy
       sources:
         - repoURL: https://grafana.github.io/helm-charts
           chart: alloy
@@ -24,7 +24,7 @@ spec:
           helm:
             valueFiles:
               - $values/environments/{{cluster}}/alloy/alloy-values.yaml
-        - repoURL: '<>'
+        - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
       destination:

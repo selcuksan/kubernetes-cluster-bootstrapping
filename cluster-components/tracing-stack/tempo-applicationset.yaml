@@ -18,7 +18,7 @@ spec:
     spec:
       project: tracing
       source:
-        repoURL: <repository-url>
+        repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
         targetRevision: HEAD
         path: environments/{{cluster}}/tracing-stack/
       destination:
