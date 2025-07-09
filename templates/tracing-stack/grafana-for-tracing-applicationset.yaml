@@ -9,12 +9,12 @@ spec:
   - list:
         elements:
         - cluster: dev
-          url: '{{ .Values.env.development.url }}'
+          url: '{{ .Values.env.test.url }}'
         # - cluster: test
         #   url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{cluster}}-loki'
+      name: '{{ "{{" }}cluster{{ "}}" }}-loki'
       namespace: argocd
     spec:
       project: tracing
@@ -24,12 +24,12 @@ spec:
           targetRevision: 9.2.9
           helm:
             valueFiles:
-              - $values/environments/{{cluster}}/tracing-stack/grafana-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/tracing-stack/grafana-values.yaml
         - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
       destination:
-        server: '{{url}}'
+        server: '{{ "{{" }}url{{ "}}" }}'
         namespace: tracing
       syncPolicy:
         automated:
