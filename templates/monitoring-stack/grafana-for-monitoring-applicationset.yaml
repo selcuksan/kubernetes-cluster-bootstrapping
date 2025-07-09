@@ -8,7 +8,7 @@ spec:
   generators:
   - list:
         elements:
-        - cluster: dev
+        - cluster: test
           url: '{{ .Values.env.test.url }}'
         - cluster: test
           url: '{{ .Values.env.test.url }}'
