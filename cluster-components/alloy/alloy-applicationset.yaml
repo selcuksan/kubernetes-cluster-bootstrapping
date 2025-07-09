@@ -6,9 +6,9 @@ metadata:
 spec:
   generators:
   - list:
-        elements:
-        - cluster: test
-          url: '{{ .Values.env.test.url }}'
+      elements:
+      - cluster: test
+        url: '{{ .Values.env.test.url }}'
   template:
     metadata:
       name: '{{ "{{" }}cluster{{ "}}" }}-alloy'
