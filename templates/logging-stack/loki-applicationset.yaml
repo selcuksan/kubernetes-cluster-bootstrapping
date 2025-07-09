@@ -21,7 +21,7 @@ spec:
           targetRevision: 0.29.1
           helm:
             valueFiles:
-              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/loki/loki-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/logging-stack/loki-values.yaml
         - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
