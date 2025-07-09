@@ -27,7 +27,7 @@ spec:
           ref: values
       destination:
         server: '{{ "{{" }}url{{ "}}" }}'
-        namespace: monitoring
+        namespace: alloy
       syncPolicy:
         automated:
           prune: true

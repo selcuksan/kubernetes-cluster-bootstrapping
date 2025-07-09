@@ -29,7 +29,7 @@ spec:
           ref: values
       destination:
         server: '{{ "{{" }}url{{ "}}" }}'
-        namespace: monitoring
+        namespace: logging
       syncPolicy:
         automated:
           prune: true
