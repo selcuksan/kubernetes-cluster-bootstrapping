@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tempo
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            url: "{{ .Values.env.development.url }}"
+          - cluster: test
+            url: "{{ .Values.env.test.url }}"
+  template:
+    metadata:
+      name: "{{cluster}}-tempo"
+      namespace: argocd
+    spec:
+      project: tracing
+      source:
+        repoURL: <repository-url>
+        targetRevision: HEAD
+        path: environments/{{cluster}}/tracing-stack/
+      destination:
+        server: "{{url}}"
+        namespace: tracing
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

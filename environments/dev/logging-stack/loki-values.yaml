@@ -1,0 +1,104 @@
+global:
+  # -- configures cluster domain ("cluster.local" by default)
+  clusterDomain: "cluster.local"
+  dnsService: "coredns"
+  dnsNamespace: "kube-system"
+
+loki:
+  auth_enabled: false
+  limits_config:
+    retention_period: 168h
+  compactor:
+    working_directory: /var/loki/data/compactor
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
+    delete_request_store: s3
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: memberlist
+        replication_factor: 1
+    chunk_idle_period: 30m
+    chunk_block_size: 262144
+    chunk_encoding: snappy
+    chunk_retain_period: 1m
+    wal:
+      dir: /var/loki/wal
+
+  schemaConfig:
+    configs:
+      - from: 2024-04-01
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+  storage:
+    type: s3
+    bucketNames:
+      chunks: "do-loki-bucket"
+      ruler: "do-loki-bucket"
+      admin: "do-loki-bucket"
+    s3:
+      s3: s3://do-loki-bucket
+      endpoint: "http://10.129.4.201:30003"
+      secretAccessKey: "V43IhKUpYsbwHcFMsnbcakGYVnoAlt95BkEUFCzN"
+      accessKeyId: "AU9U5N1234YKOTVTB921"
+      s3ForcePathStyle: true
+      insecure: true
+      sse_encryption: false
+      http_config: {}
+  # -- Check https://grafana.com/docs/loki/latest/configuration/#storage_config for more info on how to configure storages
+  storageConfig:
+    boltdb_shipper:
+      active_index_directory: /var/loki/index
+      cache_location: /var/loki/cache
+      cache_ttl: 168h
+      shared_store: s3
+    filesystem:
+      directory: /var/loki/chunks 
+
+backend:
+  # -- Number of replicas for the backend
+  replicas: 3
+  extraArgs:
+    - -config.expand-env=true
+      # -- Environment variables to add to the backend pods
+  extraEnv: []
+  extraEnvFrom:
+    - secretRef:
+        name: loki-test-credentials
+  persistence:
+    enabled: true
+    annotations:
+      reclaimspace.csiaddons.openshift.io/schedule: "@midnight"
+
+read:
+  # -- Number of replicas for the backend
+  replicas: 3
+  extraArgs:
+    - -config.expand-env=true
+      # -- Environment variables to add to the backend pods
+  extraEnv: []
+  extraEnvFrom:
+    - secretRef:
+        name: loki-test-credentials
+
+write:
+  # -- Number of replicas for the backend
+  replicas: 3
+  extraArgs:
+    - -config.expand-env=true
+      # -- Environment variables to add to the backend pods
+  extraEnv: []
+  extraEnvFrom:
+    - secretRef:
+        name: loki-test-credentials
+  persistence:
+    enabled: true
+    annotations:
+      reclaimspace.csiaddons.openshift.io/schedule: "@midnight"

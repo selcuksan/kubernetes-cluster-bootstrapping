@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: lokis-grafana
+  # This ApplicationSet is for Grafana that is used to visualize Loki logs.
+  namespace: argocd
+spec:
+  generators:
+  - list:
+        elements:
+        - cluster: dev
+          url: '{{ .Values.env.development.url }}'
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
+  template:
+    metadata:
+      name: '{{cluster}}-loki'
+      namespace: argocd
+    spec:
+      project: logging
+      sources:
+        - repoURL: https://grafana.github.io/helm-charts
+          chart: grafana
+          targetRevision: 9.2.9
+          helm:
+            valueFiles:
+              - $values/environments/{{cluster}}/logging-stack/grafana-values.yaml
+        - repoURL: 'https://github.com/selcuksan/cluster-bootstrapping.git'
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: logging
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

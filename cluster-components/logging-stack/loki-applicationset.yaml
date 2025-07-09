@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  generators:
+  - list:
+        elements:
+        - cluster: dev
+          url: '{{ .Values.env.development.url }}'
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
+  template:
+    metadata:
+      name: '{{cluster}}-loki'
+      namespace: argocd
+    spec:
+      project: logging
+      sources:
+        - repoURL: https://grafana.github.io/helm-charts
+          chart: loki
+          targetRevision: 0.29.1
+          helm:
+            valueFiles:
+              - $values/environments/{{cluster}}/loki-values.yaml
+        - repoURL: 'https://github.com/selcuksan/cluster-bootstrapping.git'
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

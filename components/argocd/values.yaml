@@ -1,3 +1,0 @@
-nameOverride: argocd-development
-# -- String to fully override `"argo-cd.fullname"`
-fullnameOverride: "argocd-development"

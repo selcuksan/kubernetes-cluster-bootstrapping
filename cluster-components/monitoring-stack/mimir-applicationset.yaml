@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mimir
+  namespace: argocd
+spec:
+  generators:
+  - list:
+        elements:
+        - cluster: dev
+          url: '{{ .Values.env.development.url }}'
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
+  template:
+    metadata:
+      name: '{{cluster}}-mimir'
+      namespace: argocd
+    spec:
+      project: monitoring
+      sources:
+        - repoURL: https://grafana.github.io/helm-charts
+          chart: mimir-distributed
+          targetRevision: 5.7.
+          helm:
+            valueFiles:
+              - $values/environments/{{cluster}}/monitoring-stack/mimir-values.yaml
+        - repoURL: <repository-url>
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

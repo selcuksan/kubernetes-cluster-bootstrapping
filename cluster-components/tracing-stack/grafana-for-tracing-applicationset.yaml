@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: grafana-for-tracing
+  # This ApplicationSet is for Grafana that is used to visualize tracing data.
+  namespace: argocd
+spec:
+  generators:
+  - list:
+        elements:
+        - cluster: dev
+          url: '{{ .Values.env.development.url }}'
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
+  template:
+    metadata:
+      name: '{{cluster}}-loki'
+      namespace: argocd
+    spec:
+      project: tracing
+      sources:
+        - repoURL: https://grafana.github.io/helm-charts
+          chart: grafana
+          targetRevision: 9.2.9
+          helm:
+            valueFiles:
+              - $values/environments/{{cluster}}/tracing-stack/grafana-values.yaml
+        - repoURL: '<>'
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: tracing
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

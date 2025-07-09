@@ -1,23 +1,40 @@
+cluster-bootstrap/
+├── cluster-components/
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   ├── templates/
+│   │   ├── alloy/
+│   │   │   ├── alloy-applicationset.yaml
+│   │   │   ├── alloy-appproject.yaml
+│   │   ├── kube-prometheus-stack/
+│   │   │   ├── kube-prometheus-applicationset.yaml
+│   │   │   ├── kube-prometheus-appproject.yaml
+│   │   ├── mimir/
+│   │   │   ├── mimir-applicationset.yaml
+│   │   │   ├── mimir-appproject.yaml
+│   │   ├── loki/
+│   │   │   ├── loki-applicationset.yaml
+│   │   │   ├── loki-appproject.yaml
+│   │   ├── tempo/
+│   │   │   ├── tempo-applicationset.yaml
+│   │   │   ├── tempo-appproject.yaml
+├── environments/
+│   ├── dev/
+│   │   ├── alloy-values.yaml
+│   │   ├── kube-prometheus-stack-values.yaml
+│   │   ├── mimir-values.yaml
+│   │   ├── loki-values.yaml
+│   │   ├── tempo-values.yaml
+│   ├── test/
+│   │   ├── alloy-values.yaml
+│   │   ├── kube-prometheus-stack-values.yaml
+│   │   ├── mimir-values.yaml
+│   │   ├── loki-values.yaml
+│   │   ├── tempo-values.yaml
 
-├── components
-│   ├── kube-prometheus-stack
-│   │   ├── Chart.yaml                     # Helm chart for kube-prometheus-stack
-│   │   ├── values.yaml                    # Default Helm values
-│   ├── loki-stack
-│   │   ├── Chart.yaml                     # Helm chart for loki-stack
-│   │   ├── values.yaml                    # Default Helm values
-│   ├── velero
-│   │   ├── Chart.yaml                     # Helm chart for velero
-│   │   ├── values.yaml                    # Default Helm values
-│   ├── vault
-│   │   ├── Chart.yaml                     # Helm chart for vault
-│   │   ├── values.yaml                    # Default Helm values
-├── bootstrap
-│   ├── argocd-application.yaml            # Initial ArgoCD installation manifest
-│   ├── sonarqube-application.yaml        # Initial SonarQube installation manifest
-│   ├── gitops-application.yaml            # Initial GitOps application manifest
-├── manifests
-│   ├── kube-prometheus-stack.yaml         # Kube Prometheus Stack manifest
-│   ├── loki-stack.yaml                    # Loki Stack manifest
-│   ├── velero.yaml                        # Velero manifest
-│   ├── vault.yaml                         # Vault manifest
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+9aukRvocejkYv480
+
+kubectl port-forward service/argocd-didak-server -n argocd 8080:443
+
+didak-cluster-components
