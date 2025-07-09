@@ -13,7 +13,7 @@ spec:
         #   url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{cluster}}-alloy'
+      name: '{{ "{{" }}cluster{{ "}}" }}-alloy'
       namespace: argocd
     spec:
       project: alloy
@@ -23,7 +23,7 @@ spec:
           targetRevision: 1.1.0
           helm:
             valueFiles:
-              - $values/environments/{{cluster}}/alloy/alloy-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/alloy/alloy-values.yaml
         - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
