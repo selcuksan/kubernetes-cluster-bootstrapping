@@ -10,9 +10,12 @@ spec:
       - cluster: test
         url: '{{ .Values.env.test.url }}'
   template:
+
     metadata:
       name: 'alloy-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
     spec:
       project: alloy
       sources:
