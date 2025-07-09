@@ -1,0 +1,39 @@
+global:
+  dnsService: coredns
+  dnsNamespace: kube-system
+  clusterDomain: cluster.local.
+
+image:
+  repository: grafana/mimir
+  pullSecrets:
+    - ""
+
+mimir:
+  structuredConfig:
+    common:
+      storage:
+        backend: s3
+        s3:
+          bucket_name: "mimir-bucket"
+          endpoint: ""
+          access_key_id: ""
+          secret_access_key: ""
+          insecure: true
+          http:
+            insecure_skip_verify: true
+    ruler_storage:
+      backend: s3
+      s3:
+        endpoint: ""
+        bucket_name: ""
+        access_key_id: ""
+        secret_access_key: ""
+        insecure: true
+    alertmanager_storage:
+      backend: s3
+      s3:
+        access_key_id: ""
+        bucket_name: ""
+        endpoint: "10.222.70.202:30008"
+        insecure: true
+        secret_access_key: ""

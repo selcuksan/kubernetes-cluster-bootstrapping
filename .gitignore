@@ -1,9 +1,9 @@
-environments/
-environments/*
-environments/test/
-environments/test/*
-environments/dev/
-environments/dev/*
+# environments/
+# environments/*
+# environments/test/
+# environments/test/*
+# environments/dev/
+# environments/dev/*
 
 root.yaml
 
