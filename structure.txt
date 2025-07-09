@@ -1,16 +1,4 @@
-├── clusters
-│   ├── prod
-│   │   ├── argocd
-│   │   │   ├── root-app.yaml               # Root Application for ArgoCD App of Apps
-│   │   │   ├── kube-prometheus-stack.yaml  # Application for kube-prometheus-stack
-│   │   │   ├── loki-stack.yaml             # Application for loki-stack
-│   │   │   ├── velero.yaml                 # Application for velero
-│   │   │   ├── vault.yaml                  # Application for vault
-│   │   ├── values
-│   │   │   ├── kube-prometheus-stack.yaml  # Helm values for kube-prometheus-stack
-│   │   │   ├── loki-stack.yaml             # Helm values for loki-stack
-│   │   │   ├── velero.yaml                 # Helm values for velero
-│   │   │   ├── vault.yaml                  # Helm values for vault
+
 ├── components
 │   ├── kube-prometheus-stack
 │   │   ├── Chart.yaml                     # Helm chart for kube-prometheus-stack
@@ -25,5 +13,11 @@
 │   │   ├── Chart.yaml                     # Helm chart for vault
 │   │   ├── values.yaml                    # Default Helm values
 ├── bootstrap
-│   ├── argocd-install.yaml                 # Initial ArgoCD installation manifest
-│   ├── namespace.yaml                     # Namespace for ArgoCD
+│   ├── argocd-application.yaml            # Initial ArgoCD installation manifest
+│   ├── sonarqube-application.yaml        # Initial SonarQube installation manifest
+│   ├── gitops-application.yaml            # Initial GitOps application manifest
+├── manifests
+│   ├── kube-prometheus-stack.yaml         # Kube Prometheus Stack manifest
+│   ├── loki-stack.yaml                    # Loki Stack manifest
+│   ├── velero.yaml                        # Velero manifest
+│   ├── vault.yaml                         # Vault manifest
