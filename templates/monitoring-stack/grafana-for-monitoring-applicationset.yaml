@@ -14,7 +14,7 @@ spec:
           url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{cluster}}-loki'
+      name: '{{ "{{" }}cluster{{ "}}" }}-loki'
       namespace: argocd
     spec:
       project: monitoring
@@ -24,12 +24,12 @@ spec:
           targetRevision: 9.2.9
           helm:
             valueFiles:
-              - $values/environments/{{cluster}}/monitoring-stack/grafana-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/grafana-values.yaml
         - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
       destination:
-        server: '{{url}}'
+        server: '{{ "{{" }}url{{ "}}" }}'
         namespace: monitoring
       syncPolicy:
         automated:

@@ -13,7 +13,7 @@ spec:
           url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{cluster}}-kube-prometheus-stack'
+      name: '{{ "{{" }}cluster{{ "}}" }}-kube-prometheus-stack'
       namespace: argocd
     spec:
       project: monitoring
@@ -23,12 +23,12 @@ spec:
           targetRevision: 27.12.0
           helm:
             valueFiles:
-              - $values/environments/{{cluster}}/monitoring-stack/kube-prometheus-stack-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/kube-prometheus-stack-values.yaml
         - repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
           targetRevision: HEAD
           ref: values
       destination:
-        server: '{{url}}'
+        server: '{{ "{{" }}url{{ "}}" }}'
         namespace: monitoring
       syncPolicy:
         automated:

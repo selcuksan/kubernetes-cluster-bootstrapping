@@ -13,7 +13,7 @@ spec:
         #   url: '{{ .Values.env.test.url }}'
   template:
     metadata:
-      name: '{{cluster}}-loki'
+      name: '{{ "{{" }}cluster{{ "}}" }}-loki'
       namespace: argocd
     spec:
       project: logging
@@ -23,12 +23,12 @@ spec:
           targetRevision: 0.29.1
           helm:
             valueFiles:
-              - $values/environments/{{cluster}}/loki-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/loki-values.yaml
         - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
           targetRevision: HEAD
           ref: values
       destination:
-        server: '{{url}}'
+        server: '{{ "{{" }}url{{ "}}" }}'
         namespace: monitoring
       syncPolicy:
         automated:
