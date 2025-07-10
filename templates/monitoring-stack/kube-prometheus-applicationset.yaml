@@ -21,7 +21,7 @@ spec:
       sources:
         - repoURL: https://prometheus-community.github.io/helm-charts
           chart: prometheus
-          targetRevision: 75.8.0
+          targetRevision: 68.4.5
           helm:
             valueFiles:
               - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/kube-prometheus-stack-values.yaml
