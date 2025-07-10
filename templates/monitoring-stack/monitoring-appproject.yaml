@@ -14,3 +14,5 @@ spec:
   destinations:
     - namespace: monitoring
       server: "{{ .Values.env.test.url }}"
+    - namespace: kube-system
+      server: "{{ .Values.env.test.url }}"
