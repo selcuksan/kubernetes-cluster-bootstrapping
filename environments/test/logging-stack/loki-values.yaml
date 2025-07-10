@@ -3,6 +3,9 @@ global:
   clusterDomain: "cluster.local"
   dnsService: "coredns"
   dnsNamespace: "kube-system"
+rbac:
+  # -- If pspEnabled true, a PodSecurityPolicy is created for K8s that use psp.
+  pspEnabled: true
 
 loki:
   auth_enabled: false
