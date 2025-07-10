@@ -7,6 +7,12 @@ image:
   repository: grafana/mimir
   pullSecrets:
     - ""
+alertmanager:
+  enabled: false
+
+ruler:
+  enabled: false
+
 
 mimir:
   structuredConfig:
