@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+spec:
+  generators:
+  - list:
+        elements:
+        - cluster: test
+          url: '{{ .Values.env.test.url }}'
+  template:
+    metadata:
+      name: 'kube-prometheus-stack-{{ "{{" }}cluster{{ "}}" }}'
+      namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "-3"
+        helm.sh/hook: crd-install
+    spec:
+      project: monitoring
+      sources:
+        - repoURL: https://prometheus-community.github.io/helm-charts
+          chart: prometheus
+          targetRevision: 27.12.0
+          helm:
+            version: v3
+            skipCrds: false
+            valueFiles:
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/kube-prometheus-stack-values.yaml
+        - repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{ "{{" }}url{{ "}}" }}'
+        namespace: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
