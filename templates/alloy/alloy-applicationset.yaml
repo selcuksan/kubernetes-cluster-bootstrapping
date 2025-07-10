@@ -10,7 +10,6 @@ spec:
       - cluster: test
         url: '{{ .Values.env.test.url }}'
   template:
-
     metadata:
       name: 'alloy-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd

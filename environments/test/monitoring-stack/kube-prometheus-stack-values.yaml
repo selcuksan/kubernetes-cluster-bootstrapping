@@ -1,3 +1,49 @@
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: cilium
+ 
+  route: # Gateway API için gerekli olursa
+    main:
+      enabled: false
+ 
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ceph-rbd
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+ 
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ceph-rbd
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+  ingress:
+    enabled: false
+    ingressClassName: cilium
+ 
+ 
 grafana:
-  enabled: true
-  adminPassword: 'admin-dev'
+  ingress:
+    enabled: true
+    ingressClassName: cilium
+ 
+  persistence:
+    enabled: true
+    type: sts
+    storageClassName: "ceph-rbd"
+    accessModes:
+      - ReadWriteOnce
+    size: 20Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
