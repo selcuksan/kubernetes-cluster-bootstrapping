@@ -13,3 +13,5 @@ spec:
   destinations:
     - namespace: tracing
       server: "{{ .Values.env.test.url }}"
+    - namespace: operators
+      server: "{{ .Values.env.test.url }}"
