@@ -15,7 +15,6 @@ spec:
       namespace: argocd
       annotations:
         argocd.argoproj.io/sync-wave: "-3"
-        helm.sh/hook: crd-install
     spec:
       project: monitoring
       sources:
