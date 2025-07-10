@@ -14,6 +14,8 @@ spec:
     metadata:
       name: 'grafana-for-monitoring-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "2"  # Ensure this is synced after Mimir and before other monitoring components
     spec:
       project: monitoring
       sources:

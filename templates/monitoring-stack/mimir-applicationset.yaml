@@ -13,6 +13,8 @@ spec:
     metadata:
       name: 'mimir-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "1"
     spec:
       project: monitoring
       sources:

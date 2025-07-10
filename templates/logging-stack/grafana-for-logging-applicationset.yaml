@@ -16,6 +16,8 @@ spec:
     metadata:
       name: 'grafana-for-logging-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "2"  # Ensure this is synced after Loki and before other logging components
     spec:
       project: logging
       sources:
