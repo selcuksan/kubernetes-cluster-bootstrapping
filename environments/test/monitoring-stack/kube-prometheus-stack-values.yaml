@@ -2,44 +2,43 @@ prometheus:
   ingress:
     enabled: true
     ingressClassName: cilium
- 
+
   route: # Gateway API için gerekli olursa
     main:
       enabled: false
- 
+
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: ceph-rbd
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 10Gi
- 
-alertmanager:
-  alertmanagerSpec:
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: ceph-rbd
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 10Gi
-  ingress:
-    enabled: false
-    ingressClassName: cilium
- 
- 
+    # storageSpec:
+    #   volumeClaimTemplate:
+    #     spec:
+    #       storageClassName: ceph-rbd
+    #       accessModes: ["ReadWriteOnce"]
+    #       resources:
+    #         requests:
+    #           storage: 10Gi
+
+# alertmanager:
+#   alertmanagerSpec:
+#     storage:
+#       volumeClaimTemplate:
+#         spec:
+#           storageClassName: ceph-rbd
+#           accessModes: ["ReadWriteOnce"]
+#           resources:
+#             requests:
+#               storage: 10Gi
+#   ingress:
+#     enabled: false
+#     ingressClassName: cilium
+
 grafana:
   ingress:
     enabled: true
     ingressClassName: cilium
- 
+
   persistence:
-    enabled: true
+    enabled: false
     type: sts
     storageClassName: "ceph-rbd"
     accessModes:
