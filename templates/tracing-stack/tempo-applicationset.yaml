@@ -16,7 +16,7 @@ spec:
       name: "tempo-{{ "{{" }}cluster{{ "}}" }}"
       namespace: argocd
       annotations:
-        argocd.argoproj.io/sync-wave: "-3"  # Ensure this is synced after Tempo and before other tracing components
+        argocd.argoproj.io/sync-wave: "0"  # Ensure this is synced after Tempo and before other tracing components
     spec:
       project: tracing
       source:
