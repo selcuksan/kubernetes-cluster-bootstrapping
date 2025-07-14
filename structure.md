@@ -1,10 +1,6 @@
 ├── Chart.yaml
 ├── values.yaml
 ├── environments
-│   ├── dev
-│   │   ├── alloy-values.yaml
-│   │   ├── kube-prometheus-stack-values.yaml
-│   │   └── vault-values.yaml
 │   └── test
 │       ├── alloy
 │       │   └── alloy-values.yaml
@@ -19,6 +15,8 @@
 │           ├── tempostack-instance.yaml
 │           ├── tempo-operator.yaml
 │           └── grafana-values.yaml
+│       └── cilium
+│           ├── cilium-values.yaml
 ├── templates
 │   ├── alloy
 │   │   ├── alloy-appproject.yaml
@@ -36,6 +34,9 @@
 │   │   ├── tracing-appproject.yaml
 │   │   ├── tempo-applicationset.yaml
 │   │   └── grafana-for-tracing-applicationset.yaml
+│   └── cilium
+│       ├── cilium-appproject.yaml
+│       └── cilium-applicationset.yaml
 
 
 

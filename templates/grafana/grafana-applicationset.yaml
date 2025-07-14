@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: grafana-for-monitoring
-  # This ApplicationSet is for Grafana that is used to visualize monitoring data.
+  name: grafana
   namespace: argocd
 spec:
   generators:
@@ -12,25 +11,25 @@ spec:
             url: "{{ .Values.env.test.url }}"
   template:
     metadata:
-      name: 'grafana-for-monitoring-{{ "{{" }}cluster{{ "}}" }}'
+      name: 'grafana-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
       annotations:
-        argocd.argoproj.io/sync-wave: "2"  # Ensure this is synced after Mimir and before other monitoring components
+        argocd.argoproj.io/sync-wave: "2"
     spec:
-      project: monitoring
+      project: grafana
       sources:
         - repoURL: https://grafana.github.io/helm-charts
           chart: grafana
           targetRevision: 9.2.9
           helm:
             valueFiles:
-              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/monitoring-stack/grafana-values.yaml
+              - $values/environments/{{ "{{" }}cluster{{ "}}" }}/grafana/grafana-values.yaml
         - repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
           targetRevision: HEAD
           ref: values
       destination:
         server: '{{ "{{" }}url{{ "}}" }}'
-        namespace: monitoring
+        namespace: grafana
       syncPolicy:
         automated:
           prune: true
