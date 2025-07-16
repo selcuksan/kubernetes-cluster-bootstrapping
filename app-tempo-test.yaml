@@ -1,0 +1,129 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+  creationTimestamp: "2025-07-16T18:30:53Z"
+  deletionGracePeriodSeconds: 0
+  deletionTimestamp: "2025-07-16T18:31:46Z"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  generation: 13
+  name: tempo-test
+  namespace: argocd
+  ownerReferences:
+  - apiVersion: argoproj.io/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ApplicationSet
+    name: tempo
+    uid: 66ec715d-e49d-4f47-bc8e-4b0c2529ef13
+  resourceVersion: "29743"
+  uid: c917c9b0-106f-4d7a-aab3-1ae0127a2961
+operation:
+  initiatedBy:
+    automated: true
+  retry:
+    backoff:
+      duration: 10s
+      factor: 2
+      maxDuration: 2m
+    limit: 5
+  sync:
+    prune: true
+    revision: aab2706dcb2acfd82c2c3da0797c33e85d6626f9
+    syncOptions:
+    - CreateNamespace=true
+spec:
+  destination:
+    namespace: tracing
+    server: https://kubernetes.default.svc
+  project: tracing
+  source:
+    path: environments/test/tracing-stack/
+    repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 2m
+      limit: 5
+    syncOptions:
+    - CreateNamespace=true
+status:
+  controllerNamespace: argocd
+  health:
+    lastTransitionTime: "2025-07-16T18:30:53Z"
+    status: Healthy
+  operationState:
+    finishedAt: "2025-07-16T18:31:53Z"
+    message: 'one or more synchronization tasks are not valid. Retrying attempt #3
+      at 6:32PM.'
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        backoff:
+          duration: 10s
+          factor: 2
+          maxDuration: 2m
+        limit: 5
+      sync:
+        prune: true
+        revision: aab2706dcb2acfd82c2c3da0797c33e85d6626f9
+        syncOptions:
+        - CreateNamespace=true
+    phase: Running
+    retryCount: 3
+    startedAt: "2025-07-16T18:30:53Z"
+    syncResult:
+      resources:
+      - group: tempo.grafana.com
+        kind: TempoStack
+        message: The Kubernetes API could not find tempo.grafana.com/TempoStack for
+          requested resource tracing/tempo. Make sure the "TempoStack" CRD is installed
+          on the destination cluster.
+        name: tempo
+        namespace: tracing
+        status: SyncFailed
+        syncPhase: Sync
+        version: v1alpha1
+      revision: aab2706dcb2acfd82c2c3da0797c33e85d6626f9
+      source:
+        path: environments/test/tracing-stack/
+        repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+        targetRevision: HEAD
+  reconciledAt: "2025-07-16T18:31:53Z"
+  resourceHealthSource: appTree
+  resources:
+  - group: operators.coreos.com
+    kind: Subscription
+    name: tempo-operator
+    namespace: operators
+    status: OutOfSync
+    version: v1alpha1
+  - group: tempo.grafana.com
+    kind: TempoStack
+    name: tempo
+    namespace: tracing
+    status: OutOfSync
+    version: v1alpha1
+  sourceHydrator: {}
+  sourceType: Directory
+  summary: {}
+  sync:
+    comparedTo:
+      destination:
+        namespace: tracing
+        server: https://kubernetes.default.svc
+      source:
+        path: environments/test/tracing-stack/
+        repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+        targetRevision: HEAD
+    revision: aab2706dcb2acfd82c2c3da0797c33e85d6626f9
+    status: OutOfSync
