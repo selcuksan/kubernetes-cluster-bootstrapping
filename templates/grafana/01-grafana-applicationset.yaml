@@ -14,7 +14,7 @@ spec:
       name: 'grafana-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
       annotations:
-        argocd.argoproj.io/sync-wave: "2"
+        argocd.argoproj.io/sync-wave: "-9"
     spec:
       project: grafana
       sources:

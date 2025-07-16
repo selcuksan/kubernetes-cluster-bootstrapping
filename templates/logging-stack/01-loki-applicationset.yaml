@@ -14,7 +14,7 @@ spec:
       name: 'loki-{{ "{{" }}cluster{{ "}}" }}'
       namespace: argocd
       annotations:
-        argocd.argoproj.io/sync-wave: "0"
+        argocd.argoproj.io/sync-wave: "-8"
     spec:
       project: logging
       sources:
