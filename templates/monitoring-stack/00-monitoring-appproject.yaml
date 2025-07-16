@@ -12,8 +12,7 @@ spec:
     - https://grafana.github.io/helm-charts
     - https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
   sourceNamespaces:
-    - monitoring
-    - kube-system
+    - argocd
   destinations:
     - namespace: monitoring
       server: "{{ .Values.env.test.url }}"
