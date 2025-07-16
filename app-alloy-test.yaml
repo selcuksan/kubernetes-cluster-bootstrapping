@@ -1,0 +1,293 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  creationTimestamp: "2025-07-14T10:36:40Z"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  generation: 54
+  name: alloy-test
+  namespace: argocd
+  ownerReferences:
+    - apiVersion: argoproj.io/v1alpha1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ApplicationSet
+      name: alloy
+      uid: 4e68664b-2840-4c96-85ce-c59255be22f0
+  resourceVersion: "24937"
+  uid: d104577e-8e92-402d-af8f-a4a0b97e7afa
+spec:
+  destination:
+    namespace: alloy
+    server: https://kubernetes.default.svc
+  project: alloy
+  sources:
+    - chart: alloy
+      helm:
+        valueFiles:
+          - $values/environments/test/alloy/alloy-values.yaml
+      repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 1.1.0
+    - ref: values
+      repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+status:
+  controllerNamespace: argocd
+  health:
+    lastTransitionTime: "2025-07-16T17:33:44Z"
+    status: Healthy
+  history:
+    - deployStartedAt: "2025-07-14T10:36:41Z"
+      deployedAt: "2025-07-14T10:41:53Z"
+      id: 0
+      initiatedBy:
+        automated: true
+      revisions:
+        - 1.1.0
+        - 6b6f6d217c28428742488f3812d2c62b8a129cea
+      source:
+        repoURL: ""
+      sources:
+        - chart: alloy
+          helm:
+            valueFiles:
+              - $values/environments/test/alloy/alloy-values.yaml
+          repoURL: https://grafana.github.io/helm-charts
+          targetRevision: 1.1.0
+        - ref: values
+          repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+          targetRevision: HEAD
+  operationState:
+    finishedAt: "2025-07-14T10:41:53Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revisions:
+          - 1.1.0
+          - 6b6f6d217c28428742488f3812d2c62b8a129cea
+        syncOptions:
+          - CreateNamespace=true
+    phase: Succeeded
+    retryCount: 5
+    startedAt: "2025-07-14T10:36:41Z"
+    syncResult:
+      resources:
+        - group: ""
+          hookPhase: Running
+          kind: ServiceAccount
+          message: serviceaccount/alloy created
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: ConfigMap
+          message: configmap/alloy created
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apiextensions.k8s.io
+          hookPhase: Running
+          kind: CustomResourceDefinition
+          message:
+            customresourcedefinition.apiextensions.k8s.io/podlogs.monitoring.grafana.com
+            created
+          name: podlogs.monitoring.grafana.com
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: rbac.authorization.k8s.io
+          hookPhase: Running
+          kind: ClusterRole
+          message:
+            "clusterrole.rbac.authorization.k8s.io/alloy reconciled. reconciliation
+            required create\n\tmissing rules added:\n\t\t{Verbs:[get list watch] APIGroups:[
+            discovery.k8s.io networking.k8s.io] Resources:[endpoints endpointslices
+            ingresses nodes nodes/proxy nodes/metrics pods services] ResourceNames:[]
+            NonResourceURLs:[]}\n\t\t{Verbs:[get list watch] APIGroups:[] Resources:[pods
+            pods/log namespaces] ResourceNames:[] NonResourceURLs:[]}\n\t\t{Verbs:[get
+            list watch] APIGroups:[monitoring.grafana.com] Resources:[podlogs] ResourceNames:[]
+            NonResourceURLs:[]}\n\t\t{Verbs:[get list watch] APIGroups:[monitoring.coreos.com]
+            Resources:[prometheusrules] ResourceNames:[] NonResourceURLs:[]}\n\t\t{Verbs:[get]
+            APIGroups:[] Resources:[] ResourceNames:[] NonResourceURLs:[/metrics]}\n\t\t{Verbs:[get
+            list watch] APIGroups:[monitoring.coreos.com] Resources:[podmonitors servicemonitors
+            probes scrapeconfigs] ResourceNames:[] NonResourceURLs:[]}\n\t\t{Verbs:[get
+            list watch] APIGroups:[] Resources:[events] ResourceNames:[] NonResourceURLs:[]}\n\t\t{Verbs:[get
+            list watch] APIGroups:[] Resources:[configmaps secrets] ResourceNames:[]
+            NonResourceURLs:[]}\n\t\t{Verbs:[get list watch] APIGroups:[apps] Resources:[replicasets]
+            ResourceNames:[] NonResourceURLs:[]}\n\t\t{Verbs:[get list watch] APIGroups:[extensions]
+            Resources:[replicasets] ResourceNames:[] NonResourceURLs:[]}. clusterrole.rbac.authorization.k8s.io/alloy
+            configured. Warning: resource clusterroles/alloy is missing the kubectl.kubernetes.io/last-applied-configuration
+            annotation which is required by  apply.  apply should only be used on resources
+            created declaratively by either  create --save-config or  apply. The missing
+            annotation will be patched automatically."
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: rbac.authorization.k8s.io
+          hookPhase: Running
+          kind: ClusterRoleBinding
+          message:
+            "clusterrolebinding.rbac.authorization.k8s.io/alloy reconciled. reconciliation
+            required create\n\tmissing subjects added:\n\t\t{Kind:ServiceAccount APIGroup:
+            Name:alloy Namespace:alloy}. clusterrolebinding.rbac.authorization.k8s.io/alloy
+            configured. Warning: resource clusterrolebindings/alloy is missing the kubectl.kubernetes.io/last-applied-configuration
+            annotation which is required by  apply.  apply should only be used on resources
+            created declaratively by either  create --save-config or  apply. The missing
+            annotation will be patched automatically."
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/alloy created
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/alloy-cluster created
+          name: alloy-cluster
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          kind: DaemonSet
+          message: daemonset.apps/alloy created
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: monitoring.coreos.com
+          hookPhase: Running
+          kind: ServiceMonitor
+          message: servicemonitor.monitoring.coreos.com/alloy created
+          name: alloy
+          namespace: alloy
+          status: Synced
+          syncPhase: Sync
+          version: v1
+      revision: ""
+      revisions:
+        - 1.1.0
+        - 6b6f6d217c28428742488f3812d2c62b8a129cea
+      source:
+        repoURL: ""
+      sources:
+        - chart: alloy
+          helm:
+            valueFiles:
+              - $values/environments/test/alloy/alloy-values.yaml
+          repoURL: https://grafana.github.io/helm-charts
+          targetRevision: 1.1.0
+        - ref: values
+          repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+          targetRevision: HEAD
+  reconciledAt: "2025-07-16T18:07:04Z"
+  resourceHealthSource: appTree
+  resources:
+    - kind: ConfigMap
+      name: alloy
+      namespace: alloy
+      status: Synced
+      version: v1
+    - kind: Service
+      name: alloy
+      namespace: alloy
+      status: Synced
+      version: v1
+    - kind: Service
+      name: alloy-cluster
+      namespace: alloy
+      status: Synced
+      version: v1
+    - kind: ServiceAccount
+      name: alloy
+      namespace: alloy
+      status: Synced
+      version: v1
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: podlogs.monitoring.grafana.com
+      status: Synced
+      version: v1
+    - group: apps
+      kind: DaemonSet
+      name: alloy
+      namespace: alloy
+      status: Synced
+      version: v1
+    - group: monitoring.coreos.com
+      kind: ServiceMonitor
+      name: alloy
+      namespace: alloy
+      status: Synced
+      version: v1
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: alloy
+      status: Synced
+      version: v1
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding
+      name: alloy
+      status: Synced
+      version: v1
+  sourceHydrator: {}
+  sourceTypes:
+    - Helm
+    - ""
+  summary:
+    images:
+      - docker.io/grafana/alloy:v1.9.0
+      - quay.io/prometheus-operator/prometheus-config-reloader:v0.81.0
+  sync:
+    comparedTo:
+      destination:
+        namespace: alloy
+        server: https://kubernetes.default.svc
+      source:
+        repoURL: ""
+      sources:
+        - chart: alloy
+          helm:
+            valueFiles:
+              - $values/environments/test/alloy/alloy-values.yaml
+          repoURL: https://grafana.github.io/helm-charts
+          targetRevision: 1.1.0
+        - ref: values
+          repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+          targetRevision: HEAD
+    revisions:
+      - 1.1.0
+      - 6b6f6d217c28428742488f3812d2c62b8a129cea
+    status: Synced
