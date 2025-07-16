@@ -39,7 +39,7 @@ spec:
         retry:
           limit: 5
           backoff:
-            duration: 5s
+            duration: 10s
             factor: 2
-            maxDuration: 30s
+            maxDuration: 2m
         
