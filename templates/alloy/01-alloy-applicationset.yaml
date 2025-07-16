@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: test
-        url: '{{ .Values.env.test.url }}'
+    - list:
+        elements:
+          - cluster: test
+            url: "{{ .Values.env.test.url }}"
   template:
     metadata:
       name: 'alloy-{{ "{{" }}cluster{{ "}}" }}'
@@ -26,7 +26,7 @@ spec:
           helm:
             valueFiles:
               - $values/environments/{{ "{{" }}cluster{{ "}}" }}/alloy/alloy-values.yaml
-        - repoURL: 'https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git'
+        - repoURL: "https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git"
           targetRevision: HEAD
           ref: values
       destination:
@@ -44,4 +44,3 @@ spec:
             duration: 10s
             factor: 2
             maxDuration: 2m
-        

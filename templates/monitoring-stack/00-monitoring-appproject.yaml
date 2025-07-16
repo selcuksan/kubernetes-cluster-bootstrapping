@@ -11,6 +11,9 @@ spec:
     - https://prometheus-community.github.io/helm-charts
     - https://grafana.github.io/helm-charts
     - https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
+  sourceNamespaces:
+    - monitoring
+    - kube-system
   destinations:
     - namespace: monitoring
       server: "{{ .Values.env.test.url }}"
