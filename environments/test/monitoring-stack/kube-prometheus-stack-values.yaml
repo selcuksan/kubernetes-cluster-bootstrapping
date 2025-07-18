@@ -1,6 +1,6 @@
 prometheus:
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: cilium
 
   route: # Gateway API için gerekli olursa
@@ -34,7 +34,7 @@ prometheus:
 
 grafana:
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: cilium
 
   persistence:
