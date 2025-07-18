@@ -13,8 +13,6 @@ spec:
   sourceNamespaces:
     - argocd
   destinations:
-    - namespace: olm
-      server: "{{ .Values.env.test.url }}"
     - namespace: operators
       server: "{{ .Values.env.test.url }}"
     - namespace: operator-lifecycle-manager
