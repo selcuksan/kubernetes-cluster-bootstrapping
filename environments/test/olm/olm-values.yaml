@@ -24,7 +24,7 @@ catalogGrpcPodPort: 50051
 olm:
   replicaCount: 1
   image:
-    ref: quay.io/operator-framework/olm:0.30.0
+    ref: quay.io/operator-framework/olm:v0.30.0
     pullPolicy: Always
   service:
     internalPort: 8080
