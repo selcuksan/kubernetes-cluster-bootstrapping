@@ -9,7 +9,7 @@ spec:
       kind: "*"
   sourceRepos:
     - https://github.com/operator-framework/operator-lifecycle-manager.git
-    - https://bitbucket.bilgem.gov.tr/scm/didak/didak-installation-components.git
+    - https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
   destinations:
     - namespace: olm
       server: "{{ .Values.env.test.url }}"

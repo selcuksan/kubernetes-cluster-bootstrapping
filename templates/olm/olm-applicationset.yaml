@@ -24,7 +24,7 @@ spec:
           helm:
             valueFiles:
               - $values/environments/{{ "{{" }}cluster{{ "}}" }}/olm/olm-values.yaml
-        - repoURL: 'https://bitbucket.bilgem.gov.tr/scm/didak/didak-installation-components.git'
+        - repoURL: https://github.com/selcuksan/kubernetes-cluster-bootstrapping.git
           targetRevision: HEAD
           ref: values
       destination:
